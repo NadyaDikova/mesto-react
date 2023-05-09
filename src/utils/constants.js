@@ -1,12 +1,3 @@
-export const validateSettings = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button",
-  inactiveButtonClass: "popup__button_disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__error_visible",
-};
-
 export const wrapper = document.querySelector(".elements"); //обертка всех карточек
 export const addButton = document.querySelector(".profile__button-add"); //кнопка "+"
 export const avatarButton = document.querySelector(".profile__avatar-edit"); //кнопка avatar
@@ -22,14 +13,19 @@ export const closeButtons = document.querySelectorAll(".popup__close"); // кн�
 //popup edit
 export const popupEdits = document.querySelector(".popup_type_edit"); // форма popup edit
 export const formElementEdit = document.forms["form-edit"]; // форма в popup edit
-export const nameInputEdit = formElementEdit.querySelector(".popup__input-name"); // input имя в popup edit
-export const jobInputEdit = formElementEdit.querySelector(".popup__input-description"); // input профессия в popup edit
+export const nameInputEdit =
+  formElementEdit.querySelector(".popup__input-name"); // input имя в popup edit
+export const jobInputEdit = formElementEdit.querySelector(
+  ".popup__input-description"
+); // input профессия в popup edit
 
 //popup add
 export const popupAdds = document.querySelector(".popup_type_add"); // форма popup add
 export const formElementAdd = document.forms["form-add"]; // форма в popup add
 export const addTitle = popupAdds.querySelector(".popup__input-name"); // input имя в popup add
-export const addDescription = popupAdds.querySelector(".popup__input-description"); // input url в popup add
+export const addDescription = popupAdds.querySelector(
+  ".popup__input-description"
+); // input url в popup add
 
 //popup picture
 export const popupPicture = document.querySelector(".popup_type_picture"); // форма popup picture

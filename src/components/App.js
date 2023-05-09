@@ -6,30 +6,32 @@ import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 
 function App() {
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
+    React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
+    React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isImageOpen, setIsImageOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
 
-function handleCardClick(card) {
+  function handleCardClick(card) {
     setIsImageOpen(true);
     setSelectedCard(card);
   }
 
-function handleEditAvatarClick() {
+  function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
   }
 
-function handleEditProfileClick() {
+  function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
   }
 
-function handleAddPlaceClick() {
+  function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true);
   }
 
-function closeAllPopups() {
+  function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
@@ -38,71 +40,108 @@ function closeAllPopups() {
 
   return (
     <div className="page">
-      <Header/>
+      <Header />
 
       <Main
-      onEditAvatar={handleEditAvatarClick}
-      onEditProfile={handleEditProfileClick}
-      onAddPlace={handleAddPlaceClick}
-      onCardClick={handleCardClick}
+        onEditAvatar={handleEditAvatarClick}
+        onEditProfile={handleEditProfileClick}
+        onAddPlace={handleAddPlaceClick}
+        onCardClick={handleCardClick}
       />
 
       <Footer />
 
       <PopupWithForm
-      id={'profile'}
-      title={'Редактировать профиль'}
-      isOpen={isEditProfilePopupOpen}
-      onClose={closeAllPopups}
+        id={"profile"}
+        title={"Редактировать профиль"}
+        isOpen={isEditProfilePopupOpen}
+        onClose={closeAllPopups}
+        buttonText={"Cохранить"}
       >
-        <fieldset className="popup__fieldset">
-          <input id="nameEdit-input" placeholder="Имя" className="popup__input popup__input-name" type="text" name="name"
-            minLength="2" maxLength="40" required />
+          <input
+            id="nameEdit-input"
+            placeholder="Имя"
+            className="popup__input popup__input-name"
+            type="text"
+            name="name"
+            minLength="2"
+            maxLength="40"
+            required
+          />
           <span className="popup__error nameEdit-input-error"></span>
-          <input id="jobEdit-input" placeholder="Занятие" className="popup__input popup__input-description" type="text" name="about"
-          minLength="2" maxLength="200" required />
+          <input
+            id="jobEdit-input"
+            placeholder="Занятие"
+            className="popup__input popup__input-description"
+            type="text"
+            name="about"
+            minLength="2"
+            maxLength="200"
+            required
+          />
           <span className="popup__error jobEdit-input-error"></span>
-        </fieldset>
+
       </PopupWithForm>
 
       <PopupWithForm
-      id={'place'}
-      title={'Новое место'}
-      isOpen={isAddPlacePopupOpen}
-      onClose={closeAllPopups}
+        id={"place"}
+        title={"Новое место"}
+        isOpen={isAddPlacePopupOpen}
+        onClose={closeAllPopups}
+        buttonText={"Создать"}
       >
-        <fieldset className="popup__fieldset">
-          <input id="nameAdd-input" className="popup__input popup__input-name" type="text" name="name"
-            placeholder="Название" minLength="2" maxLength="30" required />
+          <input
+            id="nameAdd-input"
+            className="popup__input popup__input-name"
+            type="text"
+            name="name"
+            placeholder="Название"
+            minLength="2"
+            maxLength="30"
+            required
+          />
           <span className="popup__error nameAdd-input-error"></span>
-          <input id="urlEdit-input" className="popup__input popup__input-description" type="url" name="link"
-            placeholder="Ссылка на картинку" required />
+          <input
+            id="urlEdit-input"
+            className="popup__input popup__input-description"
+            type="url"
+            name="link"
+            placeholder="Ссылка на картинку"
+            required
+          />
           <span className="popup__error urlEdit-input-error"></span>
-        </fieldset>
       </PopupWithForm>
 
       <PopupWithForm
-      id={'delete'}
-      title={'Вы уверены?'}
-      isOpen={false}
-      onClose={closeAllPopups}
+        id={"delete"}
+        title={"Вы уверены?"}
+        isOpen={false}
+        onClose={closeAllPopups}
       />
 
       <PopupWithForm
-        id={'avatar'}
-        title={'Обновить аватар'}
+        id={"avatar"}
+        title={"Обновить аватар"}
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
-        >
-          <fieldset className="popup__fieldset">
-            <input id="urlAvatar-input" className="popup__input popup__input-avatar" type="url" name="avatar"
-              placeholder="Ссылка на картинку" required />
-            <span className="popup__error urlAvatar-input-error"></span>
-          </fieldset>
+        buttonText={"Cохранить"}
+      >
+          <input
+            id="urlAvatar-input"
+            className="popup__input popup__input-avatar"
+            type="url"
+            name="avatar"
+            placeholder="Ссылка на картинку"
+            required
+          />
+          <span className="popup__error urlAvatar-input-error"></span>
       </PopupWithForm>
 
-      <ImagePopup isOpen={isImageOpen} onClose={closeAllPopups} card={selectedCard}/>
-
+      <ImagePopup
+        isOpen={isImageOpen}
+        onClose={closeAllPopups}
+        card={selectedCard}
+      />
     </div>
   );
 }
