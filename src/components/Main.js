@@ -1,47 +1,36 @@
 import React from "react";
-import { api } from "../utils/api";
 import Card from "./Card";
 import buttonEdit from "../images/edit_button.svg";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-function Main(props) {
-  const [userAvatar, setUserAvatar] = React.useState("");
-  const [userName, setUserName] = React.useState("");
-  const [userDescription, setUserDescription] = React.useState("");
-  const [cards, setCards] = React.useState([]);
-
-  React.useEffect(() => {
-    api
-      .getUser()
-      .then((res) => {
-        setUserAvatar(res.avatar);
-        setUserName(res.name);
-        setUserDescription(res.about);
-      })
-      .catch(console.log);
-  }, []);
-
-  React.useEffect(() => {
-    api
-      .getInitialCards()
-      .then((res) => {
-        setCards(res);
-      })
-      .catch(console.log);
-  }, []);
+export default function Main({
+  cards,
+  onEditProfile,
+  onAddPlace,
+  onEditAvatar,
+  onCardClick,
+  onCardLike,
+  onCardDelete,
+}) {
+  const currentUser = React.useContext(CurrentUserContext);
 
   return (
     <main className="content">
       <section className="profile">
-        <button className="profile__avatar-edit" onClick={props.onEditAvatar}>
-          <img className="profile__avatar" src={userAvatar} alt={userName} />
+        <button className="profile__avatar-edit" onClick={onEditAvatar}>
+          <img
+            className="profile__avatar"
+            src={currentUser.avatar}
+            alt="Автор"
+          />
         </button>
         <div className="profile__info">
           <div className="profile__name-container">
-            <h1 className="profile__name">{userName}</h1>
+            <h1 className="profile__name">{currentUser.name}</h1>
             <button
               className="profile__button-edit"
               type="button"
-              onClick={props.onEditProfile}
+              onClick={onEditProfile}
             >
               <img
                 className="profile__button-edit-img"
@@ -50,12 +39,12 @@ function Main(props) {
               />
             </button>
           </div>
-          <p className="profile__description">{userDescription}</p>
+          <p className="profile__description">{currentUser.about}</p>
         </div>
         <button
           className="profile__button-add"
           type="button"
-          onClick={props.onAddPlace}
+          onClick={onAddPlace}
         ></button>
       </section>
       <section className="elements">
@@ -63,15 +52,12 @@ function Main(props) {
           <Card
             key={card._id}
             card={card}
-            title={card.name}
-            image={card.link}
-            likeCounter={card.likes.length}
-            onCardClick={props.onCardClick}
+            onCardClick={onCardClick}
+            onCardLike={onCardLike}
+            onCardDelete={onCardDelete}
           />
         ))}
       </section>
     </main>
   );
 }
-
-export default Main;

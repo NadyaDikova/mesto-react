@@ -78,6 +78,10 @@ class Api {
       headers: this._getHeaders(),
     }).then(this._handleResponse);
   }
+
+  changeLikeCardStatus(id, isLiked) {
+    return !isLiked ? this.deleteLike(id) : this.addLike(id);
+  }
 }
 
 //экземпляр класса Api
